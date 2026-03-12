@@ -1,0 +1,114 @@
+POST http://localhost:3000/userapi/user
+Content-Type: application/json
+
+{
+    "firstname":"vilok",
+    "lastname":"kumar",
+    "email":"mvk@gmail.com",
+    "password":"12345",
+    "profileimageurl":"http://google.com"
+
+}
+
+### common authenticate 
+POST http://localhost:3000/commonapi/authenticate
+Content-Type: application/json
+
+{
+    "email":"admin@gmail.com",
+    "password":"vilok"
+}
+
+
+
+### change password
+PUT http://localhost:3000/commonapi/changepass
+Content-Type: application/json
+
+{
+    "email":"admin@gmail.com",
+    "oldpassword":"vsk",
+    "newpassword":"vskv"
+}
+
+
+### common logout 
+GET http://localhost:3000/commonapi/logout
+
+
+### get all articles by user
+GET http://localhost:3000/userapi/article
+
+
+
+
+### add comment by user
+PUT http://localhost:3000/userapi/article
+Content-Type: application/json
+
+{
+    "user":"69896b508a3e3c69c7ed3871",
+    "articleid":"69897343ed0e7043d1d3bbbd",
+    "comment":"hey this is a comment"
+}
+
+
+### create author 
+POST http://localhost:3000/authorapi/user
+Content-Type: application/json
+
+{
+    "firstname":"rohith",
+    "email":"suuusvwfwgeuu@gmail.com",
+    "password":"1234er5ss",
+    "profileimageurl":"http://youtube.com"
+
+}
+
+
+### create article 
+POST http://localhost:3000/authorapi/article
+Content-Type: application/json
+
+{
+    "author":"69897768ecbbf2baaf24fd05",
+    "title":"chetan",
+    "content":"this is chetan reddy"
+}
+
+
+### get all articles
+GET http://localhost:3000/authorapi/article/69896b508a3e3c69c7ed3871
+
+
+### update article
+PUT http://localhost:3000/authorapi/article
+Content-Type: application/json
+
+{
+    "author":"69896b508a3e3c69c7ed3871",
+    "articleid":"69897343ed0e7043d1d3bbbd",
+    "title":"james bond",
+    "content":"story about james bond"
+}
+
+
+### soft delete article
+PUT http://localhost:3000/authorapi/delarticle
+Content-Type: application/json
+
+{
+    "author":"69896b508a3e3c69c7ed3871",
+    "articleid":"69897343ed0e7043d1d3bbbd"
+}
+
+
+
+
+### admin blocking user
+PUT http://localhost:3000/adminapi/block/69897768ecbbf2baaf24fd05
+
+
+
+### admin unblocking the user
+PUT http://localhost:3000/adminapi/unblock/69897768ecbbf2baaf24fd05
