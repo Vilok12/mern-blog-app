@@ -21,7 +21,9 @@ function UserProfile() {
     // Fetch articles
   const getarticles = async () => {
     try{
-      let res = await axios.get("http://localhost:3000/userapi/article",{withCredentials:true})
+      let res=await axios.get(`${import.meta.env.VITE_API_URL}/userapi/article`, {
+  withCredentials: true
+})
       console.log(res)
       setarticles(res.data.payload)
     }
