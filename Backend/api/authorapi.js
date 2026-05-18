@@ -13,7 +13,7 @@ authorapp.post('/user',async(req,res)=>{
     let userobj=req.body
     // call register
     const newuserobj=await register({...userobj,role:"AUTHOR"})
-    res.status(200).json({message:"author created",payload:newuserobj})
+res.status(201).json({message:"author created",payload:newuserobj})
 })
 
 // create article (protected route)
@@ -23,7 +23,7 @@ authorapp.post('/article',verifytoken("AUTHOR"),checkauthor,async(req,res)=>{
     // create article document
     let articledoc=await articlemodel(articleobj)
     // save document
-    let createddoc=articledoc.save()
+    let createddoc=await articledoc.save()
     // send res
     res.status(201).json({message:"article created",payload:createddoc})
 
@@ -35,7 +35,7 @@ authorapp.get('/article/:authid',verifytoken("AUTHOR"),checkauthor,async(req,res
     let authorid=req.params.authid
     // get articles of particular author
     let articles=await articlemodel.find({author:authorid,isActive:true}).populate("author","firstname email")
-    res.status(201).json({message:"articles are:",paylaod:articles})
+    res.status(201).json({message:"articles are:",payload:articles})
 })
 
 // edit article (protected route)

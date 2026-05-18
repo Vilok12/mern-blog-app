@@ -57,6 +57,32 @@ export const useAuth=create(set=>({
             })
         }
     },
+    check_auth:async(userCredWithRole)=>{
+        const {role,...userCredObj}=userCredWithRole
+        try{
+            // set loading state
+            set({loading:true,error:null})
+            // make api req
+            let res=await axios.post("http://localhost:3000/commonapi/check-auth",userCredObj,{withCredentials:true})
+            console.log("res is",res)
+            // update state
+            set({ loading:false,
+                error:null,
+                isAuthenticated:true,
+                currentUser:res.data.payload
+            })
+        }
+        catch(err){
+            console.log("err is",err)
+            // set errors
+            set({
+                loading:false,
+                isAuthenticated:false,
+                currentUser:null,
+                error:err.message
+            })
+        }
+    }
    
 }
 ))

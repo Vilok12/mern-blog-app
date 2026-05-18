@@ -18,21 +18,37 @@ function UserProfile() {
   
 
   useEffect(()=>{
+
     // Fetch articles
+
   const getarticles = async () => {
+
     try{
+
       let res=await axios.get(`${import.meta.env.VITE_API_URL}/userapi/article`, {
+
   withCredentials: true
+
 })
+
       console.log(res)
+
       setarticles(res.data.payload)
+
     }
+
     catch(err){
-      console.log(err)
-      toast.error("Failed to load articles")
+
+console.error('Articles fetch error:', err)
+
+      toast.error(err.response?.data?.message || "Failed to load articles")
+
     }
+
   }
+
   getarticles()
+
   },[])
   return (
   <div className="min-h-screen flex flex-col items-center justify-center p-6">

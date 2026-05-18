@@ -9,7 +9,7 @@ import { commonapp } from './api/commonapi.js'
 import cors from 'cors'
 config()   // process .env file
 // create express application
-const app=exp()
+const app = exp()
 // add body parsing middleware
 app.use(exp.json())
 app.use(cookieParser())
@@ -24,10 +24,11 @@ const connectdb=async()=>{
     try{
     await connect(process.env.DB_URL)
     console.log("database connected")
-    app.listen(process.env.port,()=>{console.log("server is started")})
+    const port = process.env.PORT || 5000
+    app.listen(port,()=>{console.log(`server is started on port ${port}`)})
     }
     catch(err){
-        console.log("database is not connected")
+        console.log("database is not connected", err)
     }
 }
 connectdb()
@@ -38,7 +39,8 @@ app.use((req,res,next)=>{
 })
 
 // error handling middleware
-app.use((err,req,res,next)=>{
-    console.log("error is ",err)
-    res.status(400).json({message:"error",reason:err.message})
+app.use((err, req, res, next) => {
+    console.log("error is ", err)
+    res.status(400).json({ message: "error", reason: err.message })
 })
+
